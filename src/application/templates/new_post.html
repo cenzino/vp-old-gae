@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+	<h1 id="">Add a New Post</h1>
+	<form action="{{ url_for('new_post') }}" method="post" accept-charset="utf-8">
+		{{ form.hidden_tag() }}
+		<dl>
+		  {{ render_field(form.title) }}
+		  {{ render_field(form.text) }}
+		  {{ render_field(form.tags) }}
+		</dl>
+		<p><input type="submit" value="Add Post"/></p>
+	</form>
+{% endblock %}

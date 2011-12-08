@@ -31,6 +31,11 @@ app.add_url_rule('/example/new', 'new_example', view_func=views.new_example, met
 # Contrived admin-only view example
 app.add_url_rule('/admin_only', 'admin_only', view_func=views.admin_only)
 
+# Posts list page
+app.add_url_rule('/blog', 'list_posts', view_func=views.list_posts)
+
+# Add new example via web form
+app.add_url_rule('/blog/new', 'new_post', view_func=views.new_post, methods=['GET', 'POST'])
 
 
 ## Error handlers

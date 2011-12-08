@@ -15,14 +15,13 @@ from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 
 from flask import render_template, flash, url_for, redirect
 
-from models import ExampleModel
+from models import ExampleModel, Post
 from decorators import login_required, admin_required
-from forms import ExampleForm
+from forms import ExampleForm, PostForm
 
 
 def home():
-    return redirect(url_for('list_examples'))
-
+    return redirect(url_for('list_posts'))
 
 def say_hello(username):
     """Contrived example to demonstrate Flask's url routing capabilities"""
@@ -34,6 +33,27 @@ def list_examples():
     examples = ExampleModel.all()
     return render_template('list_examples.html', examples=examples)
 
+def list_posts():
+    posts = Post.all()
+    return render_template('list_posts.html', posts=posts)
+
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(
+            title = form.title.data,
+            text = form.text.data,
+            tags = form.tags.data,
+        )
+        #form.populate_obj(post)
+        try:
+            post.put()
+            flash(u'Post salvato.', 'success')
+            return redirect(url_for('list_posts'))
+        except CapabilityDisabledError:
+            flash(u'App Engine Datastore is currently in read-only mode.', 'failure')
+            return redirect(url_for('list_posts'))
+    return render_template('new_post.html', form=form)
 
 @login_required
 def new_example():
