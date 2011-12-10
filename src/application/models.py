@@ -26,3 +26,7 @@ class Post(db.Model):
 
     published = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
+
+    @property
+    def id(self):
+        return self.key().id()

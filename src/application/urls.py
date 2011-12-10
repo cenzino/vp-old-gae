@@ -37,6 +37,8 @@ app.add_url_rule('/blog', 'list_posts', view_func=views.list_posts)
 # Add new example via web form
 app.add_url_rule('/blog/new', 'new_post', view_func=views.new_post, methods=['GET', 'POST'])
 
+app.add_url_rule('/blog/post/<int:id>', 'show_post', view_func=views.show_post)
+app.add_url_rule('/blog/post/edit/<int:id>', 'edit_post', view_func=views.edit_post, methods=['POST','GET'])
 
 ## Error handlers
 # Handle 404 errors

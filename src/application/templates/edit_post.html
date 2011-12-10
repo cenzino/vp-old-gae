@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_formhelpers.html" import render_field %}
+
+{% block content %}
+	<h1 id="">Edit Post</h1>
+	<form action="{{ url_for('edit_post', id=request.view_args['id']) }}" method="post" accept-charset="utf-8">
+		{{ form.hidden_tag() }}
+		<dl>
+		  {{ render_field(form.title) }}
+		  {{ render_field(form.text) }}
+		  {{ render_field(form.tags) }}
+		</dl>
+		<p><input type="submit" value="Save Post"/></p>
+	</form>
+	{{ request.view_args['id'] }}
+{% endblock %}

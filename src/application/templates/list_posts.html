@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% from "_utils.html" import render_post %}
 {% block content %}
 <p>
 	<a href="{{ url_for('list_posts') }}">List posts</a> | <a href="{{ url_for('new_post') }}">New post</a>
@@ -16,12 +16,11 @@
 <ul>
     <h1 id="">All posts</h1>
     {% for post in posts %}
-    <li>
-        Title: {{ post.title }}<br />
-        Text: {{ post.text }}<br />
-    </li>
+      {{ render_post(post) }}
+      <a href="{{ url_for('edit_post', id=post.key().id()) }}">edit</a>
+      {{ post.id }}
     {% else %}
-    <li>No posts yet</li>
+      <li>No posts yet</li>
     {% endfor %}
 </ul>
 {% endblock %}

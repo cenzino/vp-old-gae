@@ -13,12 +13,15 @@ For example the *say_hello* handler, handling the URL route '/hello/<username>',
 from google.appengine.api import users
 from google.appengine.runtime.apiproxy_errors import CapabilityDisabledError
 
-from flask import render_template, flash, url_for, redirect
+from flask import render_template, flash, url_for, redirect, request
+
 
 from models import ExampleModel, Post
 from decorators import login_required, admin_required
 from forms import ExampleForm, PostForm
 
+from wtforms.ext.appengine.db import model_form
+from flaskext.wtf import Form
 
 def home():
     return redirect(url_for('list_posts'))
@@ -37,12 +40,17 @@ def list_posts():
     posts = Post.all()
     return render_template('list_posts.html', posts=posts)
 
+def show_post(id):
+    post = Post.get_by_id(id)
+    return render_template('show_post.html', post=post)
+    
 def new_post():
     form = PostForm()
     if form.validate_on_submit():
         post = Post(
             title = form.title.data,
             text = form.text.data,
+            text_html = "<pre>" + form.text.data + "</pre>",
             tags = form.tags.data,
         )
         #form.populate_obj(post)
@@ -55,6 +63,21 @@ def new_post():
             return redirect(url_for('list_posts'))
     return render_template('new_post.html', form=form)
 
+def edit_post(id):
+    post = Post.get_by_id(id)
+    form = PostForm(request.form, post)
+
+    if form.validate_on_submit():
+        form.populate_obj(post)
+        try:
+            post.put()
+            flash(u'Post aggiornato.', 'success')
+            return redirect(url_for('list_posts'))
+        except CapabilityDisabledError:
+            flash(u'App Engine Datastore is currently in read-only mode.', 'failure')
+            return redirect(url_for('list_posts'))
+    return render_template('edit_post.html', form=form)
+    
 @login_required
 def new_example():
     """Add a new example, detecting whether or not App Engine is in read-only mode."""
