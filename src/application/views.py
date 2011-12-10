@@ -23,6 +23,8 @@ from forms import ExampleForm, PostForm
 from wtforms.ext.appengine.db import model_form
 from flaskext.wtf import Form
 
+from libs import md2html
+
 def home():
     return redirect(url_for('list_posts'))
 
@@ -50,12 +52,12 @@ def new_post():
         post = Post(
             title = form.title.data,
             text = form.text.data,
-            text_html = "<pre>" + form.text.data + "</pre>",
+            text_html = form.text.data,
             tags = form.tags.data,
         )
         #form.populate_obj(post)
         try:
-            post.put()
+            post.save()
             flash(u'Post salvato.', 'success')
             return redirect(url_for('list_posts'))
         except CapabilityDisabledError:
@@ -70,7 +72,7 @@ def edit_post(id):
     if form.validate_on_submit():
         form.populate_obj(post)
         try:
-            post.put()
+            post.save()
             flash(u'Post aggiornato.', 'success')
             return redirect(url_for('list_posts'))
         except CapabilityDisabledError:
@@ -110,4 +112,23 @@ def warmup():
 
     """
     return ''
+
+def pygments_css():
+    import pygments.formatters
+    
+    formater = pygments.formatters.HtmlFormatter(style='tango')
+    return formater.get_style_defs('.codehilite'), 200, {'Content-Type': 'text/css'}
+
+def md():
+    import markdown
+    from flask import Markup
+    text = """
+        :::python
+        import os
+
+        print os.name
+        print "Hello World!"
+    """
+    html = markdown.markdown(text, ['codehilite'])
+    return html
 

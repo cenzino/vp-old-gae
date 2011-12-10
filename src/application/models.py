@@ -8,6 +8,8 @@ App Engine datastore models
 
 from google.appengine.ext import db
 
+#from libs import md2html
+import markdown
 
 class ExampleModel(db.Model):
     """Example Model"""
@@ -30,3 +32,8 @@ class Post(db.Model):
     @property
     def id(self):
         return self.key().id()
+
+    def save(self):
+        self.text_html = markdown.markdown(self.text, ['codehilite'])
+        #self.put()
+        super(Post, self).put()

@@ -5,4 +5,29 @@ html {background-color: #333;}
 body {background-color: #fff; margin: 2em auto; width: 960px; padding: 1em; border: 8px solid #ccc;}
 form label {display: block;}
 
-/* Your customizations here */
+.codehilite pre { 
+        -moz-border-radius: 5px;
+	border-radius: 5px;
+        padding: .5em;
+        margin: 1em 0;
+        background-color: #fafafa;
+        border: solid 1px #ddd;
+        width: auto;
+        overflow: auto;
+        font-family: "Consolas", "Monaco", "Courier New", Courier;
+}
+
+input, textarea {    
+    border: solid 2px #ddd; 
+    background-color: #fafafa;
+    font-family: "Droid Sans", Courier;
+    font-size: 1.1em;
+}
+
+#text {
+    width: 500px;
+    height: 300px;
+    /* font-family: "Droid Sans", Courier; */
+
+    line-height: 0.9em;
+}

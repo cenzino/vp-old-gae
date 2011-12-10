@@ -40,6 +40,9 @@ app.add_url_rule('/blog/new', 'new_post', view_func=views.new_post, methods=['GE
 app.add_url_rule('/blog/post/<int:id>', 'show_post', view_func=views.show_post)
 app.add_url_rule('/blog/post/edit/<int:id>', 'edit_post', view_func=views.edit_post, methods=['POST','GET'])
 
+app.add_url_rule('/pygments', 'pygments_css', view_func=views.pygments_css)
+app.add_url_rule('/md', 'md', view_func=views.md)
+
 ## Error handlers
 # Handle 404 errors
 @app.errorhandler(404)

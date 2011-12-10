@@ -2,9 +2,6 @@
   <h1><a href="{{ url_for('show_post', id=post.key().id()) }}">{{ post.title }}</a></h1>
   <small>publicato: {{ post.published }} - ultimo aggiornamento {{
   post.updated }}</small>
-  <p>{{ post.text }}</p>
-  <div>{{ post.text_html }}</div>
+  <p> {{ post.text_html|safe }} </p>
   <p>{{ post.tags }}</p>
-  Key: <mark>{{ post.key() }}</mark><br />
-  Id: <mark>{{ post.key().id() }}</mark>
 {% endmacro %}
