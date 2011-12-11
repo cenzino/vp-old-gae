@@ -1,16 +1,47 @@
 
 /* Main stylesheet */
 
+/*
 html {background-color: #333;}
 body {background-color: #fff; margin: 2em auto; width: 960px; padding: 1em; border: 8px solid #ccc;}
 form label {display: block;}
+*/
 
+html,body,h1,h2,h3,h4,h5,h6,div,p,pre,span,header,footer,small,link,a,cod,ul,li { padding:0; margin:0;font-size:100%; }
+
+html { background-color: #d3d3d3; }
+body { 
+    font-family: "Droid Sans";
+    font-weight: normal;
+    font-size: 14px; 
+    margin: 0 auto;
+    width: 700px;
+    background-color: #fff;
+    color: #222;
+    padding: .5em 3em;
+    border: solid 1px #ddd;
+}
+
+a { text-decoration: none; color: #3D5C9D; }
+
+header h1 {
+    font-size: 3.3em;
+    letter-spacing: -0.08em;
+    /* color: #3D5C9D; */
+    color: #333;
+    font-weight: 900;
+    text-transform: lowercase;
+    margin: .2em 0 .51em 0;
+}
+
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.3em; }
 .codehilite pre { 
         -moz-border-radius: 5px;
 	border-radius: 5px;
         padding: .5em;
-        margin: 1em 0;
-        background-color: #fafafa;
+        margin: 0em 0;
+        background-color: #ffffff;
         border: solid 1px #ddd;
         width: auto;
         overflow: auto;
