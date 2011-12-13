@@ -63,17 +63,130 @@ td { vertical-align: top; }
 
 
 /* ==|== primary styles =====================================================
-   Author: 
+   Author: Vincenzo Petrungaro <cenzinoos@gmail.com>
    ========================================================================== */
 
+h1, h2, h3, h4, h5, h6 {
+    margin:0; padding:0;
+    line-height: 1;
+    text-rendering: optimize-legibility;
+}
 
+html,body { 
+    /*
+    background-color: #e6e6e6; 
+    color: #222;
+    */
+    background-color: whiteSmoke;
+    /* background-color: #f5f5f5; */
+    color: #333;
+    margin: 0; 
+    padding: 0;
+    padding-top: 0px;
+    padding-bottom: 10px;
+    font-weight: 300;
+}
 
+body { 
+    font-family: "Droid Sans";
+    font-size: 14px;
+}
 
+a { color: #08C;  text-decoration: none;}
+a:hover { color: #08C; text-decoration: underline;}
+a:visited { color: #08C; }
 
+h1 a { color: #4d4d4d; }
+h1 a:hover { color: #4d4d4d; text-decoration: none; }
+h1 a:visited { color: #4d4d4d; }
 
+#container { margin: 0 auto; width: 690px; }
 
+#header-container { 
+    margin: 0 auto;
+    /* background-color: #FFF; padding: 1em; */
+}
 
+#header-container h1 { margin-top: 0em; }
+#header-container h2 { margin-top: .8em; font-family: "Droid Serif"; }
 
+#header-container h1 { padding-top: 0.4em; margin-top: 0.1em; /*letter-spacing: -0.15em;*/ color: #345; font-size: 2.5em; text-transform:lowercase; }
+#header-container h1 span { font-weight: normal; color: #777; margin: 0; }
+
+#header-container h2 { font-weight: normal; font-style: italic; color: #999; font-size: 1.2em; }
+
+header nav { float: right; margin-top: 0.0em; font-size: 1.2em; word-spacing: 0.4em; }
+header nav ul li { text-align: right; display: inline; }
+
+textarea { width: 80%; }
+#text { height: 200px; }
+
+#main {
+    padding: 1em;
+    margin-top: 2em;
+}
+
+#main section {
+    
+}
+
+#main section h1 {
+    font-weight: 800;
+    font-size: 1.2em;
+}
+
+#main article {
+    margin: 0;
+}
+
+#main article h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+#main article time {
+    color: #999;
+    font-size: 0.95em;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    padding: 0;
+    /* margin: 0 55px; */
+    background-color: #DDD;
+    border: 0;
+}
+
+.box {
+    background-color: #fff;
+    /* background-color: #fafafa; */
+    /* border: 1px solid #d7d7d7; */
+    border: 1px solid #DDD;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 15px rgba(0,0,0,.2);
+    box-shadow: 0 3px 5px rgba(0,0,0,.2)
+}
+
+.codehilite pre { 
+    -moz-border-radius: 5px;
+	border-radius: 5px;
+    padding: .5em;
+    margin: 0em 0;
+    background-color: #fafafa;
+    border: solid 1px #ddd;
+    width: auto;
+    overflow: auto;
+    font-family: "Consolas", "Monaco", "Courier New", Courier;
+}
+
+#footer-container footer { text-align: center; margin-top: 1em; font-size: 1.1em;}
+address { font-style: normal; }
+
+p { letter-spacing: 0em; font-size: 14px; font-family: "Droid Serif"; }
 
 
 

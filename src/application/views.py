@@ -25,6 +25,8 @@ from flaskext.wtf import Form
 
 from libs import md2html
 
+import pygments.formatters
+
 def home():
     return redirect(url_for('list_posts'))
 
@@ -113,9 +115,7 @@ def warmup():
     """
     return ''
 
-def pygments_css():
-    import pygments.formatters
-    
+def pygments_css():    
     formater = pygments.formatters.HtmlFormatter(style='tango')
     return formater.get_style_defs('.codehilite'), 200, {'Content-Type': 'text/css'}
 

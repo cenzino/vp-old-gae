@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 {% from "_utils.html" import render_post %}
+
 {% block content %}
-<p>
-	<a href="{{ url_for('list_posts') }}">List posts</a> | <a href="{{ url_for('new_post') }}">New post</a>
-</p>
-{% with messages = get_flashed_messages(with_categories=true) %}
-	{% if messages %}
-		<ul class="flash">
-			 {% for category, message in messages %}
-				<li class="{{category}}">{{ message }}</li>
-			 {% endfor %}
-		</ul>
-	{% endif %}
-{% endwith %}
-<ul>
-    <h1 id="">All posts</h1>
-    {% for post in posts %}
-      {{ render_post(post) }}
-      <a href="{{ url_for('edit_post', id=post.key().id()) }}">edit</a>
-      {{ post.id }}
-    {% else %}
-      <li>No posts yet</li>
-    {% endfor %}
-</ul>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+	    {% if messages %}
+		    <ul class="flash">
+			     {% for category, message in messages %}
+				    <li class="{{category}}">{{ message }}</li>
+			     {% endfor %}
+		    </ul>
+	    {% endif %}
+    {% endwith %}
+    <section>
+        <header>
+            <h1 id="">Ultimi post</h1>
+        </header>
+        <a href="{{ url_for('list_posts') }}">List posts</a> | <a href="{{ url_for('new_post') }}">New post</a>
+        <hr>
+        {% for post in posts %}
+          {{ render_post(post) }}
+          <a href="{{ url_for('edit_post', id=post.key().id()) }}">edit</a>
+          <hr>
+        {% else %}
+          No posts yet
+        {% endfor %}
+    </section>
 {% endblock %}

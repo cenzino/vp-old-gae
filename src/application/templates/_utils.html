@@ -1,7 +1,18 @@
+{% macro html5_date(date, format='%B %d, %Y', pubdate=True) -%}
+    <time{{ ' pubdate' if pubdate }} datetime="{{ date.isoformat() }}">
+        {{- date.strftime(format) }}</time>
+{%- endmacro %}
+
 {% macro render_post(post) %}
-  <h1><a href="{{ url_for('show_post', id=post.key().id()) }}">{{ post.title }}</a></h1>
-  <small>publicato: {{ post.published }} - ultimo aggiornamento {{
-  post.updated }}</small>
-  <p> {{ post.text_html|safe }} </p>
-  <p>{{ post.tags }}</p>
+<article>
+    <header>
+        <h1><a href="{{ url_for('show_post', id=post.key().id()) }}">{{ post.title }}</a></h1>
+        <time pubdate datetime="{{ post.published }}">Publicato {{ html5_date(post.published, '%A, %d %B %Y') }}</time>
+        <time datetime="{{ post.updated }}"></time>
+    </header>
+    <p> {{ post.text_html|safe }} </p>
+    <footer>
+        <p>{{ post.tags }}</p>
+    </footer>
+</article>
 {% endmacro %}
