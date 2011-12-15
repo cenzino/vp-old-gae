@@ -24,7 +24,7 @@ class Post(db.Model):
     text = db.TextProperty()
     text_html = db.TextProperty()
 
-    tags = db.StringListProperty(db.Category)
+    tags = db.ListProperty(db.Category)
 
     published = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
@@ -32,6 +32,20 @@ class Post(db.Model):
     @property
     def id(self):
         return self.key().id()
+        
+    @classmethod
+    def convert_string_tags(cls, tags):
+        new_tags = []
+        for t in tags:
+            if type(t) == db.Category:
+                new_tags.append(t)
+            else:
+                new_tags.append(db.Category(unicode(t)))
+        return new_tags
+
+    @classmethod
+    def all_by_tag(cls, tag):
+        return db.Query(Post).filter('tags = ', tag).order('-published')  
 
     def save(self):
         self.text_html = markdown.markdown(self.text, ['codehilite'])

@@ -55,8 +55,11 @@ def new_post():
             title = form.title.data,
             text = form.text.data,
             text_html = form.text.data,
-            tags = form.tags.data,
+            tags = Post.convert_string_tags(form.tags.data),
+            #tags = []
         )
+        
+        #post = Post()
         #form.populate_obj(post)
         try:
             post.save()
@@ -72,6 +75,7 @@ def edit_post(id):
     form = PostForm(request.form, post)
 
     if form.validate_on_submit():
+        form.tags.data = Post.convert_string_tags(form.tags.data)
         form.populate_obj(post)
         try:
             post.save()
@@ -81,6 +85,11 @@ def edit_post(id):
             flash(u'App Engine Datastore is currently in read-only mode.', 'failure')
             return redirect(url_for('list_posts'))
     return render_template('edit_post.html', form=form)
+
+def show_category(tag):
+    posts = Post.all_by_tag(tag)
+    return render_template('show_category.html', posts=posts)
+    
     
 @login_required
 def new_example():
