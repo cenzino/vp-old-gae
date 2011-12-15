@@ -86,11 +86,21 @@ def edit_post(id):
             return redirect(url_for('list_posts'))
     return render_template('edit_post.html', form=form)
 
+def delete_post(id):
+    post = Post.get_by_id(id)
+    try:
+        post.delete()
+        flash(u'Post eliminato.', 'success')
+        return redirect(url_for('list_posts'))
+    except CapabilityDisabledError:
+        flash(u'App Engine Datastore is currently in read-only mode.', 'failure')
+        return redirect(url_for('list_posts'))
+    
 def show_category(tag):
     posts = Post.all_by_tag(tag)
     return render_template('show_category.html', posts=posts)
-    
-    
+
+
 @login_required
 def new_example():
     """Add a new example, detecting whether or not App Engine is in read-only mode."""
@@ -140,4 +150,3 @@ def md():
     """
     html = markdown.markdown(text, ['codehilite'])
     return html
-

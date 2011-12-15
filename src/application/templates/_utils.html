@@ -12,7 +12,6 @@
     </header>
     <p> {{ post.text_html|safe }} </p>
     <footer>
-        <p>{{ post.tags }}</p>
 	Categorie:
 	{% for tag in post.tags %}
 	    <a href="{{ url_for('show_category', tag=tag)}}">{{ tag }}</a>
